@@ -1,6 +1,7 @@
 package com.akjaw.ktor.mock.tests.data
 
 import com.akjaw.ktor.mock.tests.composition.appModule
+import com.akjaw.ktor.mock.tests.helper.mockEngineModule
 import io.kotest.assertions.assertSoftly
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.runBlocking
@@ -19,7 +20,7 @@ class CorrectlyFetchesRepositories : KoinTest {
     @BeforeEach
     fun setUp() {
         startKoin {
-            modules(appModule)
+            modules(appModule, mockEngineModule)
         }
     }
 
