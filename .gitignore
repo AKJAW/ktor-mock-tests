@@ -17,3 +17,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/gradle.properties
+/.idea/shelf/Initial_Impl.xml
+/.idea/shelf/Initial_Impl/shelved.patch
