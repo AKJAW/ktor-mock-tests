@@ -2,6 +2,8 @@ package com.akjaw.ktor.mock.tests.composition
 
 import com.akjaw.ktor.mock.tests.data.GithubSearchApi
 import com.akjaw.ktor.mock.tests.data.KtorHttpEngineHolder
+import com.akjaw.ktor.mock.tests.domain.RepositorySchemaConverter
+import com.akjaw.ktor.mock.tests.domain.SearchKeywordValidator
 import com.akjaw.ktor.mock.tests.domain.SearchManager
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
@@ -25,10 +27,10 @@ val appModule = module {
             }
         }
     }
+    factory { GithubSearchApi(get()) }
+    factory { SearchKeywordValidator() }
+    factory { RepositorySchemaConverter() }
     factory {
-        GithubSearchApi(get())
-    }
-    factory {
-        SearchManager()
+        SearchManager(get(), get(), get())
     }
 }

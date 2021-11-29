@@ -3,6 +3,9 @@ package com.akjaw.ktor.mock.tests.data
 import com.akjaw.ktor.mock.tests.composition.appModule
 import com.akjaw.ktor.mock.tests.helper.GitHubApiMock
 import com.akjaw.ktor.mock.tests.helper.mockEngineModule
+import com.akjaw.ktor.mock.tests.helper.runTest
+import com.akjaw.ktor.mock.tests.helper.startApp
+import com.akjaw.ktor.mock.tests.helper.stopApp
 import io.kotest.assertions.assertSoftly
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
@@ -23,18 +26,16 @@ class MockSearchApiTest : KoinTest {
 
     @BeforeEach
     fun setUp() {
-        startKoin {
-            modules(appModule, mockEngineModule)
-        }
+        startApp()
     }
 
     @AfterEach
     fun tearDown() {
-        stopKoin()
+        stopApp()
     }
 
     @Test
-    fun `Returns the correct first repository for 'tetris' keyword`(): Unit = runBlocking {
+    fun `Returns the correct first repository for 'tetris' keyword`(): Unit = runTest {
         gitHubApiMock.givenSuccess()
 
         val result = githubSearchApi.fetchRepositories(GitHubApiMock.TETRIS_KEYWORD)
@@ -48,7 +49,7 @@ class MockSearchApiTest : KoinTest {
     }
 
     @Test
-    fun `Returns the correct first repository for 'tet' keyword`(): Unit = runBlocking {
+    fun `Returns the correct first repository for 'tet' keyword`(): Unit = runTest {
         gitHubApiMock.givenSuccess()
 
         val result = githubSearchApi.fetchRepositories(GitHubApiMock.TET_KEYWORD)
@@ -62,7 +63,7 @@ class MockSearchApiTest : KoinTest {
     }
 
     @Test
-    fun `Returns empty list on invalid keyword`(): Unit = runBlocking {
+    fun `Returns empty list on invalid keyword`(): Unit = runTest {
         gitHubApiMock.givenSuccess()
 
         val result = githubSearchApi.fetchRepositories("")
