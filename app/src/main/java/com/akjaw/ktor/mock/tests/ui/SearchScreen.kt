@@ -112,7 +112,7 @@ private fun SearchInput(
 }
 
 @Composable
-fun SearchResult(searchResult: List<String>) {
+private fun SearchResult(searchResult: List<String>) {
     LazyColumn(
         modifier = Modifier.padding(8.dp).fillMaxHeight(),
         verticalArrangement = spacedBy(6.dp)
@@ -133,7 +133,7 @@ fun SearchResult(searchResult: List<String>) {
 
 @Preview(showBackground = true)
 @Composable
-fun EmptySearchScreenPreview() {
+private fun EmptySearchScreenPreview() {
     KtorMockTestsTheme {
         SearchScreenContent(searchResults = listOf())
     }
@@ -141,7 +141,7 @@ fun EmptySearchScreenPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchScreenWithResultsPreview() {
+private fun SearchScreenWithResultsPreview() {
     KtorMockTestsTheme {
         SearchScreenContent(searchResults = previewResult)
     }

@@ -2,6 +2,7 @@ package com.akjaw.ktor.mock.tests.composition
 
 import com.akjaw.ktor.mock.tests.data.GithubSearchApi
 import com.akjaw.ktor.mock.tests.data.KtorHttpEngineHolder
+import com.akjaw.ktor.mock.tests.domain.SearchManager
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -26,5 +27,8 @@ val appModule = module {
     }
     factory {
         GithubSearchApi(get())
+    }
+    factory {
+        SearchManager()
     }
 }
