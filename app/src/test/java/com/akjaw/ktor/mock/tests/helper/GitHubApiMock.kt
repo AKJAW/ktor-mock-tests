@@ -39,7 +39,6 @@ class GitHubApiMock {
     }
 
     val engine = MockEngine { request ->
-
         handleSearchRequest(request)
             ?: errorResponse()
     }

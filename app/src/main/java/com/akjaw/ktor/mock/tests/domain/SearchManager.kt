@@ -11,7 +11,10 @@ class SearchManager(
 
     suspend fun perform(keyword: String): SearchResult {
         if (keywordValidator.validate(keyword).not()) return SearchResult.InvalidKeyword
-        val repositorySchemas = githubSearchApi.fetchRepositories(keyword)!!
+
+        val repositorySchemas = githubSearchApi.fetchRepositories(keyword)
+            ?: return SearchResult.ApiError
+
         val repositories = repositorySchemaConverter.convert(repositorySchemas)
         return SearchResult.Success(repositories)
     }

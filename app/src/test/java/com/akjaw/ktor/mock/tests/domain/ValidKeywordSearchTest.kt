@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class SuccessfulSearchTest : KoinTest {
+class ValidKeywordSearchTest : KoinTest {
 
     private val gitHubApiMock: GitHubApiMock by inject()
     private val searchManager: SearchManager by inject()
@@ -30,7 +30,7 @@ class SuccessfulSearchTest : KoinTest {
     }
 
     @Test
-    fun `Returns the correct first result for keyword 'tetris'`() = runTest {
+    fun `On API success returns the correct first result for keyword 'tetris'`() = runTest {
         gitHubApiMock.givenSuccess()
 
         val result = searchManager.perform(GitHubApiMock.TETRIS_KEYWORD).asSuccess()
@@ -40,6 +40,15 @@ class SuccessfulSearchTest : KoinTest {
             name = "react-tetris",
             ownerName = "chvin"
         )
+    }
+
+    @Test
+    fun `On API failure returns an error`() = runTest {
+        gitHubApiMock.givenFailure()
+
+        val result = searchManager.perform(GitHubApiMock.TETRIS_KEYWORD)
+
+        result shouldBe SearchResult.ApiError
     }
 
     private fun SearchResult.asSuccess(): SearchResult.Success {
