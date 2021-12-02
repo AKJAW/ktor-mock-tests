@@ -2,10 +2,10 @@ package com.akjaw.ktor.mock.tests.domain
 
 import com.akjaw.ktor.mock.tests.domain.model.RepositoryInfo
 import com.akjaw.ktor.mock.tests.domain.model.SearchResult
-import com.akjaw.ktor.mock.tests.helper.GitHubApiMock
 import com.akjaw.ktor.mock.tests.helper.runTest
 import com.akjaw.ktor.mock.tests.helper.startApp
 import com.akjaw.ktor.mock.tests.helper.stopApp
+import com.akjaw.ktor.mock.tests.mock.GitHubApiMock
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach

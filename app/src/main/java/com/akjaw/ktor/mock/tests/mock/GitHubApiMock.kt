@@ -1,4 +1,4 @@
-package com.akjaw.ktor.mock.tests.helper
+package com.akjaw.ktor.mock.tests.mock
 
 import com.akjaw.ktor.mock.tests.data.KtorHttpEngineHolder
 import io.ktor.client.engine.HttpClientEngine

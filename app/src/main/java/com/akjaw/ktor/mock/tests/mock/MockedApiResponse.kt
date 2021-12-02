@@ -1,4 +1,4 @@
-package com.akjaw.ktor.mock.tests.helper
+package com.akjaw.ktor.mock.tests.mock
 
 object MockedApiResponse {
 
