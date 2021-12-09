@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KtorMockTests</string>
+    <string name="input_too_short">Text too short</string>
+    <string name="empty_results">There are no results</string>
+    <string name="send">Send</string>
+    <string name="input_label">Search for a repository</string>
+    <string name="api_error">There was an error with the API</string>
 </resources>

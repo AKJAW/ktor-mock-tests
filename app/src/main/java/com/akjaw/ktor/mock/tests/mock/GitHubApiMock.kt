@@ -1,5 +1,6 @@
 package com.akjaw.ktor.mock.tests.mock
 
+import android.util.Log
 import com.akjaw.ktor.mock.tests.data.KtorHttpEngineHolder
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.mock.MockEngine
@@ -10,7 +11,9 @@ import io.ktor.client.request.HttpResponseData
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
+import org.koin.core.module.Module
 import org.koin.dsl.module
+import java.util.concurrent.atomic.AtomicBoolean
 
 val mockEngineModule = module {
     single { GitHubApiMock() }
@@ -31,10 +34,12 @@ class GitHubApiMock {
         get() = field ?: throw IllegalStateException("Mock has not beet initialized")
 
     fun givenSuccess() {
+        Log.d("CoolTag", "givenSuccess $this")
         isSuccess = true
     }
 
     fun givenFailure() {
+        Log.d("CoolTag", "givenFailure $this")
         isSuccess = false
     }
 
@@ -47,6 +52,7 @@ class GitHubApiMock {
         if (request.url.encodedPath.contains("search/repositories").not()) {
             return null
         }
+        Log.d("CoolTag", "$isSuccess ${this@GitHubApiMock}")
 
         val searchKeyword = request.url.parameters["q"] ?: ""
         val responseContent = when (searchKeyword.lowercase()) {
