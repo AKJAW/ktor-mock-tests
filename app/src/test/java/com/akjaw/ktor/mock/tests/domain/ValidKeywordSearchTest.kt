@@ -6,7 +6,9 @@ import com.akjaw.ktor.mock.tests.helper.runTest
 import com.akjaw.ktor.mock.tests.helper.startApp
 import com.akjaw.ktor.mock.tests.helper.stopApp
 import com.akjaw.ktor.mock.tests.mock.GitHubApiMock
+import io.kotest.assertions.assertSoftly
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -33,13 +35,16 @@ class ValidKeywordSearchTest : KoinTest {
     fun `On API success returns the correct first result for keyword 'tetris'`() = runTest {
         gitHubApiMock.givenSuccess()
 
-        val result = searchManager.perform(GitHubApiMock.TETRIS_KEYWORD).asSuccess()
+        val result = searchManager.perform(GitHubApiMock.TETRIS_KEYWORD)
 
-        result.repositories.first() shouldBe RepositoryInfo(
-            id = 76954504,
-            name = "react-tetris",
-            ownerName = "chvin"
-        )
+        assertSoftly {
+            result.shouldBeInstanceOf<SearchResult.Success>()
+            result.repositories.first() shouldBe RepositoryInfo(
+                id = 76954504,
+                name = "react-tetris",
+                ownerName = "chvin"
+            )
+        }
     }
 
     @Test
@@ -49,10 +54,5 @@ class ValidKeywordSearchTest : KoinTest {
         val result = searchManager.perform(GitHubApiMock.TETRIS_KEYWORD)
 
         result shouldBe SearchResult.ApiError
-    }
-
-    private fun SearchResult.asSuccess(): SearchResult.Success {
-        return this as? SearchResult.Success
-            ?: throw IllegalStateException("Expected a Successful result but was $this")
     }
 }

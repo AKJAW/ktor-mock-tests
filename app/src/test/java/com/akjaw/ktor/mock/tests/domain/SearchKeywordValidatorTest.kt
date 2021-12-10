@@ -33,8 +33,6 @@ internal class SearchKeywordValidatorTest {
                 testCase("Two char input is invalid", "ca", false),
                 testCase("Three char input is valid", "car", true),
                 testCase("Three char input with whitespace is invalid", " ca", false),
-                testCase("Twenty char input is valid", "c".repeat(20), true),
-                testCase("Twenty one char input is invalid", "c".repeat(21), false),
             )
         }
 

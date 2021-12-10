@@ -1,6 +1,5 @@
 package com.akjaw.ktor.mock.tests
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
@@ -19,7 +18,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import org.koin.core.module.Module
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
@@ -33,7 +31,6 @@ class SearchScreenTest : KoinTest {
     @Before
     fun setUp() {
         loadKoinModules(listOf(appModule, mockEngineModule))
-        Log.d("CoolTag", "setUp $gitHubApiMock")
     }
 
     @After

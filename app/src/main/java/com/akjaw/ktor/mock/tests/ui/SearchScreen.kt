@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
@@ -56,12 +57,10 @@ fun SearchScreen(
     var searchKeyword by remember {
         mutableStateOf("")
     }
-    val context = LocalContext.current
 
     val results = searchViewModel.result.collectAsState()
 
     fun onSubmit() {
-        Toast.makeText(context, "Searched for $searchKeyword", Toast.LENGTH_SHORT).show()
         searchViewModel.performSearch(searchKeyword)
     }
 
@@ -151,17 +150,18 @@ private fun SearchResultColumn(repositories: List<RepositoryInfo>) {
                 .fillMaxHeight(),
             verticalArrangement = spacedBy(6.dp)
         ) {
-            repositories.forEach { repository ->
-                item(repository.id) {
-                    Card {
-                        Text(
-                            text = repository.name,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(4.dp),
-                            fontSize = 20.sp
-                        )
-                    }
+            items(
+                items = repositories,
+                key = { it.id }
+            ) { repository ->
+                Card {
+                    Text(
+                        text = repository.name,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp),
+                        fontSize = 20.sp
+                    )
                 }
             }
         }

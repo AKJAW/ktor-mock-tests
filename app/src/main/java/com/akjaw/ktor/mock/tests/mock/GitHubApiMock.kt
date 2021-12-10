@@ -34,12 +34,10 @@ class GitHubApiMock {
         get() = field ?: throw IllegalStateException("Mock has not beet initialized")
 
     fun givenSuccess() {
-        Log.d("CoolTag", "givenSuccess $this")
         isSuccess = true
     }
 
     fun givenFailure() {
-        Log.d("CoolTag", "givenFailure $this")
         isSuccess = false
     }
 
@@ -52,7 +50,6 @@ class GitHubApiMock {
         if (request.url.encodedPath.contains("search/repositories").not()) {
             return null
         }
-        Log.d("CoolTag", "$isSuccess ${this@GitHubApiMock}")
 
         val searchKeyword = request.url.parameters["q"] ?: ""
         val responseContent = when (searchKeyword.lowercase()) {
